@@ -1,1 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <title>Slider</title>
+  <style>
+    * {
+      margin: 0;
+    }
+
+    header {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    img {
+      position: absolute;
+      min-width: 100%;
+      min-height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.6;
+    }
+
+    h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      font-family: tahoma, sans-serif;
+      text-shadow: 0 0 6px white;
+    }
+
+    .dots {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%)
+    }
+
+    .dots span {
+      display: inline-block;
+      background-color: #000;
+      margin: 0 20px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px white;
+      cursor: pointer;
+    }
+
+    .dots span.active {
+      box-shadow: 0 0 0 5px white, 0 0 3px 10px red;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img class="slider" src="images/img1.jpg" alt="">
+    <h1 class="slider">Pierwszy tekst</h1>
+    <div class="dots">
+      <span id="one" class="active"></span>
+      <span id="two"></span>
+      <span id="three"></span>
+    </div>
+  </header>
+
+  <script>
+    const slideList = [{
+     img: "images/img1.jpg",
+     text: 'Pierwszy tekst'
+    },
+    {
+     img: "images/img2.jpg",
+     text: 'Drugi tekst'
+    },
+    {
+     img: "images/img3.jpg",
+     text: 'Trzeci tekst'
+    }];
+
+    const image = document.querySelector('img.slider');
+    const h1 = document.querySelector('h1.slider');
+
+    const dots = [...document.querySelectorAll('.dots span')];
+    // Interfejs
+    const time = 3000;
+    let active = 0;
+
+    const changeDot = () => {
+      const activeDot = dots.findIndex( (dot) => dot.classList.contains('active'));
+      dots[activeDot].classList.remove('active');
+      dots[active].classList.add('active');
+    }
+
+    const changeSlide = () => {
+      active++;
+      if ( active === slideList.length ) active = 0;
+      image.src = slideList[active].img;
+      h1.textContent = slideList[active].text;
+      changeDot();
+    }
+    let indexInterval = setInterval(changeSlide, time);
+
+    const keyChangeSlide = (e) => {
+      if ( e.keyCode === 39 ){
+        active++;
+        clearInterval(indexInterval);
+      }
+      if ( e.keyCode === 37 ){
+        active--;
+        clearInterval(indexInterval);
+      }
+      if( active === slideList.length ) {
+        active = 0;
+      } else if ( active < 0 ){
+        active = slideList.length - 1;
+      }
+      image.src = slideList[active].img;
+      h1.textContent = slideList[active].text;
+      changeDot();
+      indexInterval = setInterval(changeSlide, time);
+    };
+
+    window.addEventListener('keydown', keyChangeSlide);
+
+    dots.forEach( (dot,i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(indexInterval);
+        active = i;
+        image.src = slideList[active].img;
+        h1.textContent = slideList[active].text;
+        changeDot();
+        indexInterval = setInterval(changeSlide, time);
+      });
+    })
+
+    // Implementacje
+  </script>
+</body>
+
+</html>
