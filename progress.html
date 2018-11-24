@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      height: 10000vh;
+    }
+    div {
+      height: 5px;
+      background: red;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    span {
+      display: block;
+      font-size: 20px;
+      position: fixed;
+      top: 10px;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+<div></div>
+<span></span>
+
+<script>
+  const line = document.querySelector('div');
+  const percent = document.querySelector('span');
+  let value = 0;
+
+  const max = 100;
+  const windowWidth = document.body.offsetWidth;
+  const windowHeight = document.body.offsetHeight;
+
+  line.style.width = value + "%";
+  percent.textContent = value + "%";
+
+  const progress = function(e){
+    let scrollTop = window.pageYOffset;
+    if ( value < windowWidth ) {
+      line.style.width = Math.round( (scrollTop / (windowHeight - window.innerHeight) ) * 100 ) + "%";
+      percent.textContent = Math.round( (scrollTop / (windowHeight - window.innerHeight)) * 100 ) + "%";
+    }
+  }
+  window.addEventListener("scroll",progress);
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      html {
+        font-family: arial;
+      }
+      button {
+        display: block;
+        margin: 50px auto 50px;
+        background-color: white;
+        border: 5px solid cadetblue;
+        padding: 20px 50px;
+        font-size: 22px;
+      }
+      div {
+        margin: 10px;
+        font-size: 26px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Wygeneruj 1000 różnych kodów</button>
+    <div></div>
+    <script>
+      const button = document.querySelector('button');
+      const div = document.querySelector('div');
+
+      const codesGenerator = () => {
+        const chars = "ABCDEFGHIJKOPRSTXZY123456789";
+
+        for(let i = 0; i < 1000; i++){
+          let code = '';
+          for(let i = 0; i < 10; i++){
+            const index = Math.floor(Math.random() * chars.length);
+            code += chars[index];
+          }
+          const divN = document.createElement('div');
+          divN.textContent = code;
+          div.appendChild(divN);
+          //div.innerHTML += code + "<br />";
+        }
+      }
+      button.addEventListener('click', codesGenerator);
+    </script>
+  </body>
+</html>

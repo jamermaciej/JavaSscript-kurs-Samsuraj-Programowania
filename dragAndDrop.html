@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+    div {
+      position: fixed;
+      background: #000;
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+    }
+    </style>
+  </head>
+  <body>
+    <div>
+
+    </div>
+  </body>
+  <script>
+    const div = document.querySelector('div');
+
+    let posX = 200;
+    let posY = 50;
+
+    let isMoving = false;
+
+    let offsetLeft;
+    let offsetTop;
+
+    div.style.left = posX + "px";
+    div.style.top = posY + "px";
+
+    div.addEventListener('mousedown',function(e){
+      this.style.backgroundColor = "lightgray";
+      isMoving = !isMoving;
+      offsetTop = e.offsetX;
+      offsetLeft = e.offsetY;
+    });
+    div.addEventListener('mousemove',function(e){
+      if ( isMoving ) {
+        posX = e.clientX - offsetTop;
+        posY = e.clientY - offsetLeft;
+        div.style.left = posX + "px";
+        div.style.top = posY + "px";
+      }
+    });
+    div.addEventListener('mouseup',function(){
+      this.style.backgroundColor = "black";
+      isMoving = !isMoving;
+    });
+  </script>
+</html>

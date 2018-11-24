@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  </head>
+  <body>
+    <form>
+      Min: <input type="number" class="min">
+      Max: <input type="number" class="max">
+      Ilość liczb: <input type="number" class="count">
+      <button>Losuj</button>
+    <h1></h1>
+    <script>
+      const button = document.querySelector('button');
+      const minInput = document.querySelector('.min');
+      const maxInput = document.querySelector('.max');
+      const count = document.querySelector('.count');
+      const h1 = document.querySelector('h1');
+
+      const randomNumber = function(min, max) {
+        return Math.floor(Math.random() * ( max - min + 1) + min);
+      }
+
+      const randomNumbers = function(e){
+        e.preventDefault();
+        let numbers = [];
+        const countNumbers = count.value;
+        const min = parseInt(minInput.value);
+        const max = parseInt(maxInput.value);
+        // for(let i = 0; i < 10; i++){
+          // const number = randomNumber(1,49);
+          // if ( numbers.indexOf(number) < 0 ) {
+          //   numbers.push(number);
+            //wykonanie się 10 razy niezależnie ile liczb znajdzie
+          // }
+        // }
+        if ( countNumbers && min && max && countNumbers > max - min ){
+          alert('Maksymalna ilość losowanych liczb to ' + (max - min));
+          count.value = max;
+          return;
+        }
+        while ( numbers.length < countNumbers ) {
+          const number = randomNumber(min,max);
+          if ( numbers.indexOf(number) < 0 ) {
+            numbers.push(number);
+          }
+        }
+        h1.textContent = numbers;
+      }
+
+      button.addEventListener('click', randomNumbers);
+    </script>
+  </body>
+</html>

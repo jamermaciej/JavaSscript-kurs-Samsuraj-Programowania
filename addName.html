@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      body * {
+        font-size: 26px;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input type="text">
+      <button>Dodaj</button>
+    </form>
+    <div></div>
+    <script>
+      const button = document.querySelector('button');
+      const div = document.querySelector('div');
+      const input = document.querySelector('input');
+      let names = [];
+
+      const addName = (e) => {
+        e.preventDefault();
+
+        const name = input.value;
+        if( name.length ){
+          for ( n of names ) {
+            if( n === name ){
+              input.value = '';
+              alert("Błąd!");
+              return;
+            }
+          }
+          names.push(name);
+          div.textContent += name + ", ";
+          input.value = '';
+        }
+        //
+        // if( name.length && names.indexOf(name) < 0 ) {
+        //   names.push(name);
+        //   div.textContent += name + ", ";
+        //   input.value = '';
+        // } else {
+        //   input.value = '';
+        //   alert("Błąd!");
+        // }
+      }
+      button.addEventListener('click', addName);
+    </script>
+  </body>
+</html>

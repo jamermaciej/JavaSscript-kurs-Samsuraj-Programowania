@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Typing - zadanie dla Ciebie</title>
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&amp;subset=latin-ext" rel="stylesheet">
+
+
+ <style>
+  div {
+   font-family: roboto;
+   max-width: 80%;
+   margin: 20px auto;
+   font-size: 60px;
+   letter-spacing: 1px;
+  }
+
+  .cursor {
+   opacity: 0;
+   transition: .2s;
+  }
+
+
+  .cursor.active {
+   opacity: 1;
+  }
+ </style>
+</head>
+
+<body>
+ <div>
+  <span class="text"></span><span class="cursor">|</span>
+ </div>
+
+ <script>
+   // http://websamuraj.pl/examples/js/projekt8/
+   // Uzyskaj efekt jak pod tym linkiem
+   // Użyj setTimeout zamiast setInterval,
+   // Opóźniej start pisanie każdego słowa
+   // Uwaga: Zadanie bardzo trudne
+
+   const spnText = document.querySelector('.text');
+   const spnCursor = document.querySelector('.cursor');
+   const txt = ['tekst1', 'tekst2', 'tekst3']
+
+   let indexLetter = -15;
+   let indexText = 0;
+
+   // Implementacja
+   const addLetter = () => {
+     if ( indexLetter >= 0 ) {
+       spnText.textContent += txt[indexText][indexLetter];
+    }
+       indexLetter++;
+
+     if( indexLetter === txt[indexText].length ) {
+       indexText++;
+       if( indexText === txt.length ) return;
+
+       return setTimeout( () => {
+         indexLetter = -15;
+         spnText.textContent = '';
+         addLetter();
+       }, 2000);
+     }
+     setTimeout( addLetter , 500);
+   }
+
+
+   addLetter(); //pierwsze wywołanie
+
+
+   // Animacja kursora (zostaw bez zmian)
+   const cursorAnimation = () => {
+    spnCursor.classList.toggle('active');
+   }
+   setInterval(cursorAnimation, 400);
+ </script>
+</body>
+
+</html>

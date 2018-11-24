@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      .cursor {
+        opacity: 0;
+        transition: all .4s;
+      }
+      .cursor.active {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div><span class="text"></span><span class="cursor">|</span></div>
+    <script>
+      const spnText = document.querySelector('.text');
+      const txt = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+      const cursor = document.querySelector('.cursor');
+
+      let indexText = 0;
+      const time = 10;
+
+      const addLetter = () => {
+        spnText.textContent += txt[indexText];
+        indexText++;
+        if ( indexText === txt.length ) clearInterval(indexTypying);
+      }
+      const cursorAnimation = () => {
+        cursor.classList.toggle('active');
+      }
+      const indexTypying = setInterval(addLetter, time);
+      setInterval(cursorAnimation, 400);
+    </script>
+  </body>
+</html>

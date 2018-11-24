@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      body {
+        margin: 5vw;
+        text-align: center;
+        font-family: arial;
+      }
+      label,
+      input {
+        height: 40px;
+        line-height: 40px;
+        font-size: 30px;
+      }
+      div {
+        border: 2px solid black;
+        font-size: 40px;
+        margin: 20px;
+      }
+      .active {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="password">Wproadź hasło: </label>
+    <input type="password" name="password" id="password">
+    <div class="message"></div>
+    <script>
+      const input = document.querySelector('[name="password"]');
+      const div = document.querySelector('.message')
+      const passwords = ["uSer","wioSna"];
+      const messages = ['Jutro czeka Cię dobry dzień!', 'Wiosna, piękna pora roku!'];
+
+      // passwords.forEach( (password,index) => {
+      //   passwords[index] = password.toLowerCase();
+      // });
+
+      const checkPassword = function(e){
+        div.textContent = '';
+        const pass = (e.target.value).toLowerCase();
+        const passwordsLower = passwords.map( password => password.toLowerCase());
+
+        passwordsLower.forEach( (password, index) => {
+          if( pass === password ){
+            div.textContent = messages[index];
+            e.target.value = '';
+          }
+        });
+        //   if( pass.toLowerCase() === password.toLowerCase() ){
+        //     console.log(messages[index])
+        //     div.textContent = messages[index];
+        //     e.target.value = '';
+        //   }
+        // });
+        // if ( pass === password ) {
+        //   div.textContent = message;
+        //   input.value = '';
+        // } else {
+        //   div.textContent = '';
+        // }
+      }
+      input.addEventListener('input',checkPassword);
+      input.addEventListener('focus', () => {
+        input.classList.add('active');
+      });
+      input.addEventListener('blur', (e) => {
+        e.target.classList.remove('active');
+      });
+    </script>
+  </body>
+</html>

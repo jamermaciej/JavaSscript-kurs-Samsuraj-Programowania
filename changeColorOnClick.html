@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+    body {
+      margin: 0;
+      height: 100vh;
+    }
+    </style>
+  </head>
+  <body>
+  </body>
+  <script>
+    const changeColor = function(e){
+      const x = e.clientX;
+      const y = e.clientY;
+      console.log(x, y);
+      // if( x % 2 == 0 &&  y % 2 == 0 ){
+      //   document.body.style.backgroundColor = "red";
+      // } else if ( x % 2 == 1 && y % 2 == 1 ){
+      //   document.body.style.backgroundColor = "blue";
+      // } else if ( (x % 2 == 0 && y % 2 == 1) || (x % 2 == 1 && y % 2 == 0)){
+      //     document.body.style.backgroundColor = "green";
+      //   }
+      // }
+      const color = getColor(e);
+      document.body.style.backgroundColor = color;
+    }
+    document.body.addEventListener('click',changeColor);
+    const getColor = function(e){
+      if( e.clientX % 2 === 0 ) {
+        if( e.clientY % 2 === 0 ) {
+          return "red";
+        } else {
+          return "green";
+        }
+      } else {
+        if( e.clientY % 2 === 1 ) {
+          return "blue";
+        } else {
+        return "green";
+      }
+    }
+  }
+  </script>
+</html>

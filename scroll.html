@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+    body {
+      height: 500vh;
+    }
+      div {
+        background: black;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+      }
+    </style>
+  </head>
+  <body>
+  </body>
+  <script>
+      const square = document.createElement('div');
+      document.body.appendChild(square);
+      let size = 100;
+
+      square.style.width = size + "px";
+      square.style.height = size + "px";
+
+      const maxSize = window.innerWidth / 2;
+      let grow = true;
+
+      const changeSize = function(e) {
+        if ( grow ) {
+          size += 10;
+          grow = size >= maxSize ? false : true;
+        } else {
+          size -= 10;
+          grow = size < 100 ? true : false;
+        }
+        square.style.width = size + "px";
+        square.style.height = size + "px";
+      }
+      window.addEventListener('scroll',changeSize);
+  </script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  </head>
+  <body>
+  </body>
+  <script>
+    let size = 10;
+    let orderElement = 1;
+    const init = function(){
+      const add = document.createElement('button');
+      const reset = document.createElement('button');
+      const ul = document.createElement('ul');
+      add.textContent = "Dodaj element";
+      reset.textContent = "Resetuj listę";
+      document.body.appendChild(add);
+      document.body.appendChild(reset);
+      document.body.appendChild(ul);
+
+      add.addEventListener('click',createElements);
+      reset.addEventListener('click',resetList);
+    }
+    const createElements  = function(){
+      for(let i = 0; i < 10; i++){
+        const ul = document.querySelector('ul');
+        const li = document.createElement('li');
+        li.textContent = orderElement;
+        li.style.fontSize = size + "px";
+        ul.appendChild(li);
+        orderElement++;
+        size++;
+      }
+    }
+    const resetList = function(){
+      const ul = document.querySelector('ul');
+      ul.innerHTML = '';
+      size = 10;
+      orderElement = 1;
+    }
+    init();
+  </script>
+</html>

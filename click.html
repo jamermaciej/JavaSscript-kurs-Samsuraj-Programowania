@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      /* li {
+        display: none;
+      } */
+      ul li {
+        display: none;
+      }
+      ul.show li {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Kliknij</button>
+    <ul>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+      <li>element 1</li>
+    </ul>
+  </body>
+  <script>
+      const button = document.querySelector('button');
+      const list = document.querySelectorAll('li');
+      const ul = document.querySelector('ul');
+      let font = 10;
+      const showList = function(){
+        // list.forEach( ( element ) => {
+        //   if ( element.style.display !== "block" ) {
+        //     element.style.display = "block";
+        //   }
+        // });
+        if ( !ul.classList.contains('show') ){
+          ul.classList.add('show');
+        }
+        font += 1;
+        ul.style.fontSize = font + "px";
+      }
+      button.addEventListener('click',showList);
+  </script>
+</html>
